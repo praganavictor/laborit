@@ -1,98 +1,94 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# Laborit - AI SQL Assistant
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Um assistente inteligente desenvolvido com **NestJS** que utiliza Inteligência Artificial Generativa (**Google Gemini**) para transformar perguntas em linguagem natural em consultas SQL, executá-las no banco de dados e fornecer respostas amigáveis.
 
-## Description
+## 🚀 Tecnologias
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- **Framework**: [NestJS](https://nestjs.com/)
+- **Linguagem**: TypeScript
+- **AI / LLM**: [Google Gemini](https://deepmind.google/technologies/gemini/) via [Vercel AI SDK](https://sdk.vercel.ai/docs)
+- **Database**: MySQL com [Drizzle ORM](https://orm.drizzle.team/)
+- **Linting/Formatting**: [Biome](https://biomejs.dev/)
 
-## Project setup
+## ✨ Funcionalidades
 
+- **Text-to-SQL**: Converte perguntas como "Quantos produtos temos em estoque?" para SQL válido.
+- **Execução Segura**: Roda a query gerada no banco de dados.
+- **Respostas Humanizadas**: A IA analisa o resultado do banco e gera uma resposta natural em português.
+- **API REST**: Endpoint simples para integração.
+
+## ⚙️ Pré-requisitos
+
+Antes de começar, certifique-se de ter instalado:
+- [Node.js](https://nodejs.org/) (Versão LTS recomendada)
+- [pnpm](https://pnpm.io/) (ou npm/yarn)
+- Um banco de dados **MySQL** acessível.
+
+## 🛠️ Instalação
+
+1. Clone o repositório:
 ```bash
-$ pnpm install
+git clone https://github.com/praganavictor/laborit.git
+cd laborit
 ```
 
-## Compile and run the project
-
+2. Instale as dependências:
 ```bash
-# development
-$ pnpm run start
-
-# watch mode
-$ pnpm run start:dev
-
-# production mode
-$ pnpm run start:prod
+pnpm install
 ```
 
-## Run tests
-
-```bash
-# unit tests
-$ pnpm run test
-
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
+3. Configure as variáveis de ambiente:
+Crie um arquivo `.env` na raiz do projeto com as seguintes chaves (exemplo):
+```env
+DATABASE_URL="mysql://usuario:senha@localhost:3306/nome_do_banco"
+GOOGLE_GENERATIVE_AI_API_KEY="sua-chave-da-api-do-google"
 ```
 
-## Deployment
+## ▶️ Como Rodar
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
+### Desenvolvimento
 ```bash
-$ pnpm install -g @nestjs/mau
-$ mau deploy
+pnpm run dev
+```
+O servidor iniciará em `http://localhost:3000`.
+
+### Build e Produção
+```bash
+pnpm run build
+pnpm run start:prod
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+## 🔌 API
 
-## Resources
+### `POST /questions`
 
-Check out a few resources that may come in handy when working with NestJS:
+Envia uma pergunta para o assistente.
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+**Request Body:**
+```json
+{
+  "question": "Quais são os 5 produtos mais caros?"
+}
+```
 
-## Support
+**Exemplo de Resposta:**
+```json
+{
+  "is_data_question": true,
+  "query": "SELECT product_name, unit_price FROM products ORDER BY unit_price DESC LIMIT 5",
+  "result": [
+    { "product_name": "Côte de Blaye", "unit_price": 263.50 },
+    ...
+  ],
+  "response": "Os 5 produtos mais caros são: Côte de Blaye, Thüringer Rostbratwurst..."
+}
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## 🤝 Contribuição
 
-## Stay in touch
+Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou pull requests.
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## 📝 Licença
 
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Este projeto é [UNLICENSED](LICENSE).
